@@ -20,9 +20,7 @@ const Main = () => {
   return (
     <div className="layout">
       <Nav userName={userName} />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 };
