@@ -1,7 +1,8 @@
-import { useRouteError, Link, useNavigate } from "react-router-dom"
+import { useRouteError, Link, useNavigate } from "react-router-dom";
 
 // library imports
-import { HomeIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid"
+import { HomeIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
+import React from "react";
 
 const Error = () => {
   const error = useRouteError();
@@ -12,22 +13,16 @@ const Error = () => {
       <h1>Uh oh! We’ve got a problem.</h1>
       <p>{error.message || error.statusText}</p>
       <div className="flex-md">
-        <button
-          className="btn btn--dark"
-          onClick={() => navigate(-1)}
-        >
+        <button onClick={() => navigate(-1)}>
           <ArrowUturnLeftIcon width={20} />
           <span>Go Back</span>
         </button>
-        <Link
-          to="/"
-          className="btn btn--dark"
-        >
+        <Link to="/">
           <HomeIcon width={20} />
           <span>Go home</span>
         </Link>
       </div>
     </div>
-  )
-}
-export default Error
+  );
+};
+export default Error;

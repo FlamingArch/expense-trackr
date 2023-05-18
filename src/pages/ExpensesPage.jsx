@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 
 // library import
 import { toast } from "react-toastify";
+import React from "react";
 
 // component imports
 import Table from "../components/Table";

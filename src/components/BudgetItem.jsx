@@ -3,6 +3,7 @@ import { Form, Link } from "react-router-dom";
 
 // library imports
 import { BanknotesIcon, TrashIcon } from "@heroicons/react/24/outline";
+import React from "react";
 
 // helper functions
 import {
@@ -48,7 +49,7 @@ const BudgetItem = ({ budget, showDelete = false }) => {
               }
             }}
           >
-            <button type="submit" className="btn">
+            <button type="submit">
               <span>Delete Budget</span>
               <TrashIcon width={20} />
             </button>
@@ -56,7 +57,7 @@ const BudgetItem = ({ budget, showDelete = false }) => {
         </div>
       ) : (
         <div className="flex-sm">
-          <Link to={`/budget/${id}`} className="btn">
+          <Link to={`/budget/${id}`}>
             <span>View Details</span>
             <BanknotesIcon width={20} />
           </Link>

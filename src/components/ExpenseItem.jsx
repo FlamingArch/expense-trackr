@@ -3,6 +3,7 @@ import { Link, useFetcher } from "react-router-dom";
 
 // library import
 import { TrashIcon } from "@heroicons/react/24/solid";
+import React from "react";
 
 // helper imports
 import {
@@ -41,11 +42,7 @@ const ExpenseItem = ({ expense, showBudget }) => {
         <fetcher.Form method="post">
           <input type="hidden" name="_action" value="deleteExpense" />
           <input type="hidden" name="expenseId" value={expense.id} />
-          <button
-            type="submit"
-            className="btn btn--warning"
-            aria-label={`Delete ${expense.name} expense`}
-          >
+          <button type="submit" aria-label={`Delete ${expense.name} expense`}>
             <TrashIcon width={20} />
           </button>
         </fetcher.Form>

@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 // library imports
 import { toast } from "react-toastify";
+import React, { useState } from "react";
 
 // components
 import Intro from "../components/Intro";
@@ -84,52 +85,71 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
+  const [isAddBudgetVisible, setIsAddBudgetVisible] = useState(false);
   const { userName, budgets, expenses } = useLoaderData();
 
   return (
     <>
       {userName ? (
-        <div className="dashboard">
-          <h1>
-            Welcome back, <span className="accent">{userName}</span>
-          </h1>
-          <div className="grid-sm">
-            {budgets && budgets.length > 0 ? (
-              <div className="grid-lg">
-                <div className="flex-lg">
-                  <AddBudgetForm />
-                  <AddExpenseForm budgets={budgets} />
-                </div>
-                <h2>Existing Budgets</h2>
-                <div className="budgets">
-                  {budgets.map((budget) => (
-                    <BudgetItem key={budget.id} budget={budget} />
-                  ))}
-                </div>
-                {expenses && expenses.length > 0 && (
-                  <div className="grid-md">
-                    <h2>Recent Expenses</h2>
-                    <Table
-                      expenses={expenses
-                        .sort((a, b) => b.createdAt - a.createdAt)
-                        .slice(0, 8)}
-                    />
-                    {expenses.length > 8 && (
-                      <Link to="expenses" className="btn btn--dark">
-                        View all expenses
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="grid-sm">
-                <p>Personal budgeting is the secret to financial freedom.</p>
-                <p>Create a budget to get started!</p>
+        <div
+          className="dashboard"
+          style={{
+            padding: "0px",
+          }}
+        >
+          <header
+            style={{
+              display: "grid",
+              gap: "1rem",
+              padding: "2rem",
+              borderBottom: "1px solid #000a",
+            }}
+          >
+            <h1 className="bold">
+              Welcome back, <span className="accent">{userName}</span>
+            </h1>
+            <h3 style={{ lineHeight: "1.3" }} className="medium">
+              Personal budgeting is the secret to financial freedom. Start your
+              journey today.
+            </h3>
+          </header>
+
+          {budgets && budgets.length > 0 ? (
+            <div className="grid-lg">
+              <div className="flex-lg">
                 <AddBudgetForm />
+                <AddExpenseForm budgets={budgets} />
               </div>
-            )}
-          </div>
+              <h2>Existing Budgets</h2>
+              <div className="budgets">
+                {budgets.map((budget) => (
+                  <BudgetItem key={budget.id} budget={budget} />
+                ))}
+              </div>
+              {expenses && expenses.length > 0 && (
+                <div className="grid-md">
+                  <h2>Recent Expenses</h2>
+                  <Table
+                    expenses={expenses
+                      .sort((a, b) => b.createdAt - a.createdAt)
+                      .slice(0, 8)}
+                  />
+                  {expenses.length > 8 && (
+                    <Link to="expenses">View all expenses</Link>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <p>
+                Personal budgeting is the secret to financial freedom.
+                <br />
+                Create a budget to get started!
+              </p>
+              <AddBudgetForm isVisible={isAddBudgetVisible} />
+            </>
+          )}
         </div>
       ) : (
         <Intro />

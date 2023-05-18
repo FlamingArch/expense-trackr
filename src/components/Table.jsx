@@ -1,5 +1,6 @@
 // component import
 import ExpenseItem from "./ExpenseItem";
+import React from "react";
 
 const Table = ({ expenses, showBudget = true }) => {
   return (
